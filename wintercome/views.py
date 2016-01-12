@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
+import json
 
 # Create your views here.
 
@@ -23,6 +24,11 @@ def login_page(request):
 def logout_page(request):
     logout(request)
     return render(request, 'wintercome/login.html')
+
+
+def json_page(request):
+    context = {'user': 'Daine.H', 'cmd': "ls -l", 'level': 100}
+    return HttpResponse(json.dumps(context), content_type='application/json')
 
 
 
