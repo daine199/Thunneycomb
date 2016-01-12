@@ -18,7 +18,7 @@ WinterCome Login
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           {% if user.is_authenticated %}
-          <form class="navbar-form navbar-right" action="" method="post">
+          <form class="navbar-form navbar-right" action="{% url 'wintercome:logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-success">Log Out</button>
           </form>

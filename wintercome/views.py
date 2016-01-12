@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -17,13 +17,12 @@ def login_page(request):
         else:
             print("login failed.")
         # print(username, password)
-        return render(request, 'wintercome/login.html')
-    #     user = authenticate(username=username, password=password)
-    #     if user is not None:
-    #         login(request, user)
-    #         return render(request, 'wintercome/login.html')
-    #     else:
-    #         return render(request, 'wintercome/login.html')
-    # else:
-    #     return render(request, 'wintercome/login.html')
-    #
+    return render(request, 'wintercome/login.html')
+
+
+def logout_page(request):
+    logout(request)
+    return render(request, 'wintercome/login.html')
+
+
+
