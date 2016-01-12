@@ -26,10 +26,10 @@ WinterCome Login
           <form class="navbar-form navbar-right" action="{% url 'wintercome:login_page' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-              <input placeholder="Email" class="form-control" type="text" value="username" name="username">
+              <input placeholder="UserID" class="form-control" type="text" name="username">
             </div>
             <div class="form-group">
-              <input placeholder="Password" class="form-control" type="password" value="password" name="password">
+              <input placeholder="Password" class="form-control" type="password" name="password">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>
