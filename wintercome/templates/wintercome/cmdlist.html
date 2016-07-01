@@ -1,0 +1,29 @@
+{% extends "wintercome/base.html" %}
+
+{% block title %}
+Task Dashboard
+{% endblock %}
+
+{% block content %}
+<h1>Avaliable CMD task:</h1>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>CMD Title</th>
+    <th>Description</th>
+    <th>Run Level</th>
+</tr>
+{% for cmdtask in cmdtasklist %}
+<tr>
+    <td><a href="{% url 'wintercome:basic-cmd-call' cmdtask.id %}">
+        {{cmdtask.id}}
+    </a> </td>
+    <td>{{cmdtask.title}}</td>
+    <td>{{cmdtask.description</td>
+    <td>{{cmdtask.runlevel}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
