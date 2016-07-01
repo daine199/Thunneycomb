@@ -4,7 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 
 from .models import cmdTask, runLevel, winterUser
-from .lib import MACRO, common
 import json, time
 
 #
