@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import cmdTask,runLevel,winterUser
+from .models import cmdTask, runLevel, winterUser
 # Register your models here.
 
 # class cmdTaskInline(admin.StackedInline):
@@ -15,6 +15,6 @@ class winterUserAdmin(admin.ModelAdmin):
 class cmdTaskAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'ownerid','cmd','runlevel')
 
-admin.site.register(cmdTask,cmdTaskAdmin)
-admin.site.register(winterUser,winterUserAdmin)
-admin.site.register(runLevel,runLevelAdmin)
+admin.site.register(cmdTask, cmdTaskAdmin)
+admin.site.register(winterUser, winterUserAdmin)
+admin.site.register(runLevel, runLevelAdmin)

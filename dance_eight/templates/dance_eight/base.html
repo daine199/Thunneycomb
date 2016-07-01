@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static "dance_eight/css/dance_eight.css" %}">
+        <title>{% block title %}<!--custom title-->{% endblock %}</title>
+        {% block styles %}<!--custom styles-->{% endblock %}
+    </head>
+    <body>
+
+    <div class="container">
+
+        <div class="header">
+        {% block header %}<!--custom content-->{% endblock %}
+        </div>
+
+        <div class="main-content">
+        {% block content %}<!--custom content-->{% endblock %}
+        </div>
+
+        <div class="footer">
+        {% block footer %}<!--custom content-->{% endblock %}
+        </div>
+
+        {% block scripts %}<!--custom scripts-->{% endblock %}
+
+
+    <!-- end .container --></div>
+    </body>
+</html>

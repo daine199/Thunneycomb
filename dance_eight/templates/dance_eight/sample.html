@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>DannyBlog</title>
+
+  <link href="/static/css/dblog.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+
+        <div id="top">
+          <a href="/blog/"><img src="/static/images/LOGO.png" alt="LOGO" name="logo" width="180" height="60" id="logo" /></a>
+          <div id="nav_div">
+
+            <ul id="top_nav">
+
+              <li><a href="/" class="a_normal">首页</a></li>
+
+              <li><a href="#" class="a_normal">订阅</a></li>
+
+              <li><a href="#" class="a_normal">关于</a></li>
+
+            </ul>
+          </div>
+
+        </div>
+    <!-- end .header --></div>
+
+    <div class="content_body">
+      <div class="main_body">
+        {% for blog in blogs %}
+          <div class="blog_body">
+            <div class="blog_title"><a href="/detail/?id={{ blog.id }}">{{ blog.caption }}</a></div>
+            <div class="blog_info1">
+              <span class="blog_info1_list">
+                <span class="li_small_1">分类：<a href="#">{{ blog.classification }}</a></span>
+                <span class="li_small_1">发表时间：{{ blog.publish_time|date:"Y-m-d H:i" }}</span>
+              </span>
+            </div>
+            <div class="blog_splitline"></div>
+            <div class="blog_description">{{ blog.content }}</div>
+            <div class="blog_info2">
+              <span class="blog_info2_list">
+                <span class="li_small_2">标签：{% for tag in blog.tags.all %}<a href="#">{{ tag.tag_name }}</a>{% endfor %}</span>
+              </span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="footer">
+      <div id="footer_logo"></div>
+      <div id="siteinfo">&copy; 2007 - 2012 DannyWork Project</div>
+    <!-- end .footer --></div>
+  <!-- end .container --></div>
+</body>
+</html>

@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wintercome',
-    'home',
     'django.contrib.sites', # django 1.6.2+
     'django.contrib.humanize',
     'django_nyt',
@@ -55,6 +53,13 @@ INSTALLED_APPS = [
 
 if DEBUG:  # DEBUG APP
     INSTALLED_APPS.append('summerhere')
+    INSTALLED_APPS.append('dance_eight')
+    INSTALLED_APPS.append('wintercome')
+    INSTALLED_APPS.append('home')
+else:
+    INSTALLED_APPS.append('wintercome')
+    INSTALLED_APPS.append('home')
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',

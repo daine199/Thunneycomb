@@ -21,8 +21,8 @@ from django_nyt.urls import get_pattern as get_nyt_pattern
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('home.urls', namespace='home')),
-    url(r'^wintercome/', include('wintercome.urls', namespace='wintercome'))
+    url(r'^', include('home.urls', namespace='home'))
+
 ]
 
 urlpatterns += [
@@ -31,5 +31,7 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    url(r'^summerhere/', include('summerhere.urls', namespace='summerhere'))
+    url(r'^summerhere/', include('summerhere.urls', namespace='summerhere')),
+    url(r'^wintercome/', include('wintercome.urls', namespace='wintercome')),
+    url(r'^dance_eight/', include('dance_eight.urls', namespace='dance_eight'))
 ]
