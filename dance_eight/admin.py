@@ -1,22 +1,25 @@
 from django.contrib import admin
-from .models import DanceEightManager, Tag, Classification, Author, Article
-# Register your models here.
+from django import forms
+from redactor.widgets import RedactorEditor
+from .models import Article
 
 
-class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'website')
-    search_fields = ('name',)
+class ArticleAdminForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = (
+            'title',
+            'author',
+            'content'
+        )
+        widgets = {
+           'content': RedactorEditor(),
+        }
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'sub_title', 'classification', 'author', 'publish_time', 'update_time')
-    list_filter = ('publish_time',)
-    date_hierarchy = 'publish_time'
-    ordering = ('-publish_time',)
-    filter_horizontal = ('tags',)
+    list_display = ('id', 'title')
+    form = ArticleAdminForm
 
-admin.site.register(DanceEightManager)
-admin.site.register(Tag)
-admin.site.register(Classification)
-admin.site.register(Author, AuthorAdmin)
+
 admin.site.register(Article, ArticleAdmin)

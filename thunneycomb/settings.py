@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+if os.path.exists('DEBUG'):
+    DEBUG = True
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,7 +26,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'kv%nxx(07o53+&__xvse93+v_!*(o4kcds$#ifyg0_*7omak_c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 if DEBUG is False:
     TEMPLATE_DEBUG = False
 
@@ -56,9 +58,11 @@ if DEBUG:  # DEBUG APP
     INSTALLED_APPS.append('dance_eight')
     INSTALLED_APPS.append('wintercome')
     INSTALLED_APPS.append('home')
+    INSTALLED_APPS.append('redactor')
 else:
     INSTALLED_APPS.append('wintercome')
     INSTALLED_APPS.append('home')
+    INSTALLED_APPS.append('redactor')
 
 
 MIDDLEWARE_CLASSES = [
@@ -159,16 +163,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # MEDIA_ROOT = "/var/www/thunneycomb/media"
-if DEBUG is False:
-    MEDIA_ROOT = "/var/www/thunneycomb/media/"
-    STATIC_ROOT = "/var/www/thunneycomb/static/"
-else:
+if DEBUG is True:
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
+else:
+    MEDIA_ROOT = "/var/www/thunneycomb/media/"
+    STATIC_ROOT = "/var/www/thunneycomb/static/"
+
 
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 
+# ext Path
 STATICFILES_DIRS = [
     # "/var/www/thunneycomb/static",
     ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
