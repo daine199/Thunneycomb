@@ -10,10 +10,18 @@ import re
 
 class Article(models.Model):
     title = models.CharField(max_length=50, verbose_name="标题")
-    content = RedactorField(verbose_name="内容")
     author = models.ForeignKey(User)
+    content = RedactorField(verbose_name="内容")
+    pub_date = models.DateTimeField('发布日期')
 
     def __str__(self):
         return self.title
 
+
+class Comment(models.Model):
+    target = models.ForeignKey(Article)
+    content = RedactorField(verbose_name="评论内容")
+
+    def __str__(self):
+        return self.target.title
 
