@@ -1,7 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -36,12 +39,17 @@ def index(request):
             return render(request, 'home/index.html', context)
 
 
+@login_required(login_url='/login/')
+def login_test_page(request):
+    return HttpResponse("test")
+
+
 def login_processor(request):
     if request.method == 'GET':
         if request.user.is_authenticated():
             return redirect("/")
         else:
-            return redirect("/admin")
+            return redirect("/login_page")
 
 
 def logout_processor(request):
@@ -49,4 +57,20 @@ def logout_processor(request):
         logout(request)
         return redirect("/")
 
+
+def login_page(request):
+    if request.method == 'GET':
+        print(request.path)
+        if not request.user.is_authenticated():
+            return render(request, 'home/login.html')
+    else:
+        userid = request.POST.get('userid')
+        password = request.POST.get('password')
+        print(userid, password)
+        user = authenticate(username=userid, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/wiki')
+        else:
+            return redirect("/")
 
