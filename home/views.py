@@ -56,6 +56,8 @@ def logout_processor(request):
     if request.user.is_authenticated():
         logout(request)
         return redirect("/")
+    else:
+        return redirect("/")
 
 
 def login_page(request):
