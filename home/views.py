@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    access_entry = ("login", "logout", "wiki")
+    access_entry = ("login", "logout", "wiki", "admin")
     ext_entry = ("requests", "django")
     if request.method == 'GET':
         return render(request, 'home/index.html')
