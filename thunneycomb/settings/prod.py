@@ -166,3 +166,6 @@ STATICFILES_DIRS = [
     ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
     ("home", os.path.join(BASE_DIR, "static/home/"))
 ]
+
+LOGIN_REDIRECT_URL = '/'
+ADMIN_SITE_HEADER = "Thunneycomb Admin"
