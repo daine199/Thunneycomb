@@ -2,10 +2,10 @@ from django.db import models
 
 # Create your models here.
 import base64, time, subprocess, shlex
-from .lib.logging import (trace_app_log, appLogging,
-                                    cmdLogging, loggingtime,
-                                    strToBytes, cmdErrorLogging)
-from .lib import MACRO, common
+# from .lib.logging import (trace_app_log, appLogging,
+#                                     cmdLogging, loggingtime,
+#                                     strToBytes, cmdErrorLogging)
+# from .lib import MACRO, common
 
 
 # Owner Daine.H
@@ -22,7 +22,7 @@ class cmdTask(models.Model):
     def __str__(self):
         return self.title
 
-    @trace_app_log
+    # @trace_app_log
     def taskAllocate(self,userid = 1):
         if self.ownerid == userid:
             return self.baseCall()
@@ -32,7 +32,7 @@ class cmdTask(models.Model):
             else:
                 cmdErrorLogging(MACRO.RUNLEVELTOOLOW)
 
-    @trace_app_log
+    # @trace_app_log
     def baseCall(self):
         # 运行命令行,记录运行结果到log文件,返回状态码
         logprint = "\nRun cmd {0} at {1} . \n".format(self.title,loggingtime())
@@ -40,18 +40,20 @@ class cmdTask(models.Model):
         res = subprocess.Popen(shlex.split(self.cmd),
                                stdout = subprocess.PIPE)
         resprint = res.stdout.read()
-        cmdLogging(resprint)
-        cmdLogging(strToBytes('Return {0}\n'.format(res.poll())))
+        # cmdLogging(resprint)
+        # cmdLogging(strToBytes('Return {0}\n'.format(res.poll())))
         return {'returncode':res.poll(), 'returnprint':common.bytesToStr(resprint).split("\n")}
 
-    @trace_app_log
+    # @trace_app_log
     def quickcall(self):
         # 快速运行程序
         return subprocess.call(shlex.split(self.cmd))
 
+
 class runLevel(models.Model):
     title = models.CharField(max_length=32)
-    level = models.IntegerField(default= MACRO.VIEWER)
+    level = models.IntegerField(default= 100)
+
     def __str__(self):
         return self.title
 
@@ -73,7 +75,7 @@ class winterUser(models.Model):
         return ori_pwd
     def __str__(self):
         return self.userid
-    @trace_app_log
+    # @trace_app_log
     def createCmd(self,cmdline = None):
         logfile = time.strftime(MACRO.APPLOGFILETIME,
                                 time.localtime(time.time()))

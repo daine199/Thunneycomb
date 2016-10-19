@@ -1,0 +1,31 @@
+<div id="example" role="application">
+    <div class="demo-section k-content">
+          <form action="/userlogin/" method="post" class="form">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% bootstrap_label context %}
+          <h2></h2>
+
+          <label>用户名:</label>
+          <input type="text" name="username" />
+          <label>密码:</label>
+          <input type="password" name="password" />
+          <br>
+          <br>
+
+          <button type="submit" class="k-button">Send Invitation</button>
+
+          </form>
+        </div>
+
+    <style>
+        .demo-section label {
+            display: block;
+            margin: 15px 0 5px 0;
+        }
+        #get {
+            float: right;
+            margin: 25px auto 0;
+        }
+    </style>
+    </div>
