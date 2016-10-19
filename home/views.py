@@ -3,15 +3,13 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth import logout
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
 
 # Create your views here.
 
 
 def index(request):
-    access_entry = ("login", "logout")
+    access_entry = ("login", "logout", "wiki")
     ext_entry = ("requests", "django")
     if request.method == 'GET':
         return render(request, 'home/index.html')
@@ -19,6 +17,10 @@ def index(request):
         app_name = request.POST.get('app_name').lower()
 
         if app_name in access_entry:
+            if app_name == "login":
+                return redirect('/admin/login/?next=/')
+            if app_name == "wiki":
+                return redirect('/admin/login/?next=/wiki')
             return redirect("/" + app_name)
 
         elif app_name in ext_entry:
@@ -39,11 +41,6 @@ def index(request):
             return render(request, 'home/index.html', context)
 
 
-@login_required(login_url='/login/')
-def login_test_page(request):
-    return HttpResponse("test")
-
-
 def login_processor(request):
     if request.method == 'GET':
         if request.user.is_authenticated():
@@ -60,19 +57,10 @@ def logout_processor(request):
         return redirect("/")
 
 
-def login_page(request):
-    if request.method == 'GET':
-        print(request.path)
-        if not request.user.is_authenticated():
-            return render(request, 'home/login.html')
-    else:
-        userid = request.POST.get('userid')
-        password = request.POST.get('password')
-        print(userid, password)
-        user = authenticate(username=userid, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/wiki')
-        else:
-            return redirect("/")
+# @login_required(login_url='/accounts/login/')
+# def my_view(request):
+#     return redirect("/wiki")
+
+
+
 

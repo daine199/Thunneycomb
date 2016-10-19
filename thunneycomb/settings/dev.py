@@ -73,7 +73,7 @@ ROOT_URLCONF = 'thunneycomb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -169,3 +169,7 @@ STATICFILES_DIRS = [
     ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
     ("home", os.path.join(BASE_DIR, "static/home/"))
 ]
+
+LOGIN_REDIRECT_URL = '/'
+ADMIN_SITE_HEADER = "Thunneycomb Admin"
+

@@ -18,11 +18,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from wiki.urls import get_pattern as get_wiki_pattern
 from django_nyt.urls import get_pattern as get_nyt_pattern
+from django.conf import settings
+from django.conf.urls import url
+from django.contrib.auth import views
+
+admin.site.site_header = settings.ADMIN_SITE_HEADER
+admin.site.site_title = 'Thunneycomb'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('home.urls', namespace='home'))
-    # url(r'^wintercome/', include('wintercome.urls', namespace='wintercome'))
+    url(r'^', include('home.urls', namespace='home')),
+    url(r'^wintercome/', include('wintercome.urls', namespace='wintercome'))
 ]
 
 urlpatterns += [
@@ -32,4 +38,16 @@ urlpatterns += [
 
 urlpatterns += [
     url(r'^summerhere/', include('summerhere.urls', namespace='summerhere'))
+]
+
+urlpatterns += [
+    url(r'^admin/login/$', views.login, name='login'),
+    url(r'^admin/logout/$', views.logout, name='logout'),
+    url(r'^admin/password_change/$', views.password_change, name='password_change'),
+    url(r'^password_change/done/$', views.password_change_done, name='password_change_done'),
+    url(r'^password_reset/$', views.password_reset, name='password_reset'),
+    url(r'^password_reset/done/$', views.password_reset_done, name='password_reset_done'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.password_reset_confirm, name='password_reset_confirm'),
+    url(r'^reset/done/$', views.password_reset_complete, name='password_reset_complete'),
 ]
