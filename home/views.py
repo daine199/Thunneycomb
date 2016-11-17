@@ -26,6 +26,8 @@ def index(request):
         elif app_name in ext_entry:
             if app_name == "requests":
                 return redirect("http://www.python-requests.org/en/master/")
+            if app_name == "php":
+                return redirect("http://www.thunneycomb.com:8000/")
 
         elif app_name in settings.INSTALLED_APPS:
             return redirect("/" + app_name)
@@ -35,8 +37,6 @@ def index(request):
                 return redirect("/" + app_name)
             else:
                 return render(request, 'home/index.html')
-        elif app_name == "php":
-            return redirect("http://www.thunneycomb.com:8000/")
 
         else:
             context = {"error": "Invalid App"}
