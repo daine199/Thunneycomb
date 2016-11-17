@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    access_entry = ("login", "logout", "wiki", "admin")
+    access_entry = ("login", "logout", "wiki", "admin", "php")
     ext_entry = ("requests", "django")
     if request.method == 'GET':
         return render(request, 'home/index.html')
@@ -35,6 +35,8 @@ def index(request):
                 return redirect("/" + app_name)
             else:
                 return render(request, 'home/index.html')
+        elif app_name == "php":
+            return redirect("http://www.thunneycomb.com:8000/")
 
         else:
             context = {"error": "Invalid App"}
