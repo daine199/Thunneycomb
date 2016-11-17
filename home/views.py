@@ -9,8 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    access_entry = ("login", "logout", "wiki", "admin", "php")
-    ext_entry = ("requests", "django")
+    access_entry = ("login", "logout", "wiki", "admin")
+    ext_entry = ("requests", "django", "php")
     if request.method == 'GET':
         return render(request, 'home/index.html')
     if request.method == 'POST':
@@ -28,6 +28,8 @@ def index(request):
                 return redirect("http://www.python-requests.org/en/master/")
             if app_name == "php":
                 return redirect("http://www.thunneycomb.com:8000/")
+            if app_name == "django":
+                return redirect("https://www.djangoproject.com/")
 
         elif app_name in settings.INSTALLED_APPS:
             return redirect("/" + app_name)
