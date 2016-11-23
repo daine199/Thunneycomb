@@ -27,8 +27,7 @@ admin.site.site_title = 'Thunneycomb'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('home.urls', namespace='home')),
-    url(r'^wintercome/', include('wintercome.urls', namespace='wintercome'))
+    url(r'^', include('home.urls', namespace='home'))
 ]
 
 urlpatterns += [

@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wintercome',
     'home',
     'django.contrib.sites', # django 1.6.2+
     'django.contrib.humanize',
