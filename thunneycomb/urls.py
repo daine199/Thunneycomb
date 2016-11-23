@@ -52,7 +52,8 @@ urlpatterns += [
     url(r'^reset/done/$', views.password_reset_complete, name='password_reset_complete'),
 ]
 
-urlpatterns += static('/weimo/', document_root="/home/sophie.mao/www-root")
+urlpatterns += [url(r'^weimo/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/daine199/test'})
+                ]
 
 
 
