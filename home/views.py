@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Entrance
+from django.core import exceptions
 from django.shortcuts import redirect
 from django.conf import settings
 from django.contrib.auth import logout
@@ -41,8 +42,14 @@ def index(request):
                 return render(request, 'home/index.html')
 
         else:
-            context = {"error": "Invalid App"}
-            return render(request, 'home/index.html', context)
+            try:
+                ent = Entrance.objects.get(entrance=app_name)
+            except exceptions.ObjectDoesNotExist:
+                context = {"error": "Invalid Entrance {}".format(app_name)}
+                return render(request, 'home/index.html', context)
+            return redirect(ent.entrance_url)
+
+
 
 
 def login_processor(request):
