@@ -17,6 +17,6 @@ router = routers.DefaultRouter()
 router.register('Entrance', views.EntranceViewSet)
 
 urlpatterns += [
-    url(r'^rest/$', include(router.urls))
+    url(r'^rest/', include(router.urls))
 ]
 

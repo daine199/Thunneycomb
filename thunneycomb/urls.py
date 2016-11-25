@@ -21,6 +21,7 @@ from django_nyt.urls import get_pattern as get_nyt_pattern
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib.auth import views
+from rest_framework.authtoken import views as rest_views
 
 admin.site.site_header = settings.ADMIN_SITE_HEADER
 admin.site.site_title = 'Thunneycomb'
@@ -54,7 +55,8 @@ urlpatterns += [
 # REST LOGIN
 if settings.LOGIN_ENABLE:
     urlpatterns += [
-        url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+        url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+        url(r'^api-token-auth/', rest_views.obtain_auth_token)
     ]
 
 
