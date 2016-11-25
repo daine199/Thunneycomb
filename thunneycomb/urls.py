@@ -14,8 +14,7 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url, include
-from django.conf.urls.static import static
+from django.conf.urls import include
 from django.contrib import admin
 from wiki.urls import get_pattern as get_wiki_pattern
 from django_nyt.urls import get_pattern as get_nyt_pattern
@@ -51,6 +50,12 @@ urlpatterns += [
         views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', views.password_reset_complete, name='password_reset_complete'),
 ]
+
+# REST LOGIN
+if settings.LOGIN_ENABLE:
+    urlpatterns += [
+        url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    ]
 
 
 

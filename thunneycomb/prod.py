@@ -168,3 +168,11 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = '/'
 ADMIN_SITE_HEADER = "Thunneycomb Admin"
+
+# REST
+LOGIN_ENABLE = True
+INSTALLED_APPS += ['rest_framework']
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
+    'PAGE_SIZE': 10
+}
