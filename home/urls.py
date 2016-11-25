@@ -19,3 +19,4 @@ router.register('Entrance', views.EntranceViewSet)
 urlpatterns += [
     url(r'^rest/$', include(router.urls))
 ]
+
