@@ -1,0 +1,12 @@
+Django==1.9.7
+django-classy-tags==0.8.0
+django-mptt==0.8.6
+django-nyt==0.9.9
+django-sekizai==0.10.0
+djangorestframework==3.5.3
+Markdown==2.6.7
+Pillow==3.4.2
+six==1.10.0
+sorl-thumbnail==12.3
+uWSGI==2.0.14
+wiki==0.1.2

@@ -37,10 +37,6 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    url(r'^summerhere/', include('summerhere.urls', namespace='summerhere'))
-]
-
-urlpatterns += [
     url(r'^admin/login/$', views.login, name='login'),
     url(r'^admin/logout/$', views.logout, name='logout'),
     url(r'^admin/password_change/$', views.password_change, name='password_change'),
