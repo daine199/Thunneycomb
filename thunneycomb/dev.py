@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from .appsetting.wiki_settings import *
+from .appsetting.rest_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,19 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wintercome',
-    'home',
-    'django.contrib.sites', # django 1.6.2+
-    'django.contrib.humanize',
-    'django_nyt',
-    'mptt',
-    'sekizai',
-    'sorl.thumbnail',
-    'wiki',
-    'wiki.plugins.attachments',
-    'wiki.plugins.notifications',
-    'wiki.plugins.images',
-    'wiki.plugins.macros',
+    'home'
 ]
 
 if DEBUG:  # DEBUG APP
@@ -164,26 +154,8 @@ else:
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    # "/var/www/thunneycomb/static",
-    ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
-    ("home", os.path.join(BASE_DIR, "static/home/"))
-]
-
 LOGIN_REDIRECT_URL = '/'
 ADMIN_SITE_HEADER = "Thunneycomb Admin"
 
-# REST
-LOGIN_ENABLE = True
-INSTALLED_APPS += ['rest_framework',
-                   'rest_framework.authtoken'
-                   ]
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
-    'PAGE_SIZE': 10,
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication'
-    )
-}
+INSTALLED_APPS += WIKI_APPS
+INSTALLED_APPS += REST_APPS
