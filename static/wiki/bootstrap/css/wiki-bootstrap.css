@@ -6440,6 +6440,9 @@ label {
 .wiki-article table > thead > tr > td {
   border-bottom-width: 2px;
 }
+.table-responsive {
+  border: none;
+}
 .wiki-article h1,
 .wiki-article h2,
 .wiki-article h3,
