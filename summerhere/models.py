@@ -18,7 +18,7 @@ class Summer(models.Model):
 class SummerImage(models.Model):
     img_description = models.CharField(max_length=128)
     artical_belong = models.ForeignKey(Summer)
-    img = models.ImageField(upload_to=os.path.join(settings.MEDIA_ROOT, 'summerhere'))
+    img = models.ImageField()
 
     def __str__(self):
         return self.img_description
