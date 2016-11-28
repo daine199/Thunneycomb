@@ -29,7 +29,8 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
         'height': 300,
-        'width': 800,
+        'width': 750,
+        'language': 'zh-cn'
     },
 }
 
