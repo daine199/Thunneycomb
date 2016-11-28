@@ -55,6 +55,11 @@ if settings.LOGIN_ENABLE:
         url(r'^api-token-auth/', rest_views.obtain_auth_token)
     ]
 
-
+# django-wysiwyg-redactor URL
+urlpatterns += [
+    # ...
+    url(r'^redactor/', include('redactor.urls')),
+    # ...
+]
 
 
