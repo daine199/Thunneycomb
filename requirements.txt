@@ -1,4 +1,5 @@
 Django==1.9.7
+django-ckeditor==5.1.1
 django-classy-tags==0.8.0
 django-mptt==0.8.6
 django-nyt==0.9.9

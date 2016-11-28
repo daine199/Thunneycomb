@@ -15,6 +15,7 @@ Including another URLconf
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include
+from django.conf.urls.static import static
 from django.contrib import admin
 from wiki.urls import get_pattern as get_wiki_pattern
 from django_nyt.urls import get_pattern as get_nyt_pattern
@@ -55,11 +56,16 @@ if settings.LOGIN_ENABLE:
         url(r'^api-token-auth/', rest_views.obtain_auth_token)
     ]
 
-# django-wysiwyg-redactor URL
+
+# Platycodon URL
 urlpatterns += [
-    # ...
-    url(r'^redactor/', include('redactor.urls')),
-    # ...
+    url(r'^platycodon/', include('platycodon.urls', namespace='platycodon')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls'))
 ]
+
+# DEV static settings
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
