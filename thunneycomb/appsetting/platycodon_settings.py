@@ -6,7 +6,7 @@ PLATYCODON_APPS = [
     'platycodon'
 ]
 
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+CKEDITOR_JQUERY_URL = './platycodon/js/jquery/3.1.1/jquery.min.js'
 
 """
 UPLOAD SETTINGS
@@ -23,4 +23,13 @@ CKEDITOR_RESTRICT_BY_USER = True
 
 # to show directories on the "Browse Server" page.
 CKEDITOR_BROWSE_SHOW_DIRS = True
+
+# Toolbar settings
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 300,
+    },
+}
 
