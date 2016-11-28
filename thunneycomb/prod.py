@@ -152,11 +152,12 @@ else:
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    # "/var/www/thunneycomb/static",
-    ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
-    ("home", os.path.join(BASE_DIR, "static/home/"))
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        # "/var/www/thunneycomb/static",
+        ("wiki", os.path.join(BASE_DIR, "static/wiki/")),
+        ("home", os.path.join(BASE_DIR, "static/home/"))
+    ]
 
 LOGIN_REDIRECT_URL = '/'
 ADMIN_SITE_HEADER = "Thunneycomb Admin"
