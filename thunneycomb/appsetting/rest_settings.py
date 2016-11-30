@@ -1,5 +1,5 @@
 # REST SETTINGS
-LOGIN_ENABLE = True
+LOGIN_ENABLE = False
 
 REST_APPS = ['rest_framework',
              'rest_framework.authtoken'

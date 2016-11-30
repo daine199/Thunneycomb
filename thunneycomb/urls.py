@@ -53,8 +53,10 @@ urlpatterns += [
 if settings.LOGIN_ENABLE:
     urlpatterns += [
         url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-        url(r'^api-token-auth/', rest_views.obtain_auth_token)
     ]
+urlpatterns += [
+    url(r'^api-token-auth/', rest_views.obtain_auth_token)
+]
 
 
 # Platycodon URL
