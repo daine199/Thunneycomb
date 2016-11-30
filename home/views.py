@@ -1,8 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Entrance
 from django.core import exceptions
 from django.shortcuts import redirect
-from django.conf import settings
 from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -61,6 +61,7 @@ def logout_processor(request):
         return redirect("/")
 
 
+@login_required
 class EntranceViewSet(viewsets.ModelViewSet):
     queryset = Entrance.objects.all()
     serializer_class = EntranceSerializer
