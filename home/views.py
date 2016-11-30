@@ -18,7 +18,6 @@ from .serializers import EntranceSerializer
 
 def index(request):
     access_entry = ("login", "logout", "wiki", "admin")
-    ext_entry = ("requests", "django", "php")
     if request.method == 'GET':
         return render(request, 'home/index.html')
     if request.method == 'POST':
@@ -31,18 +30,7 @@ def index(request):
                 return redirect('/admin/login/?next=/wiki')
             return redirect("/" + app_name)
 
-        elif app_name in ext_entry:
-            if app_name == "requests":
-                return redirect("http://www.python-requests.org/en/master/")
-            if app_name == "php":
-                return redirect("http://www.thunneycomb.com:8000/")
-            if app_name == "django":
-                return redirect("https://www.djangoproject.com/")
-
-        elif app_name in settings.INSTALLED_APPS:
-            return redirect("/" + app_name)
-
-        elif app_name == "admin":
+        if app_name == "admin":
             if request.user.is_authenticated():
                 return redirect("/" + app_name)
             else:
