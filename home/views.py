@@ -16,7 +16,6 @@ from .serializers import EntranceSerializer
 
 
 def index(request):
-    access_entry = ("login", "logout", "wiki", "admin")
     if request.method == 'GET':
         return render(request, 'home/index.html')
     if request.method == 'POST':
@@ -50,60 +49,7 @@ class EntranceViewSet(viewsets.ModelViewSet):
     serializer_class = EntranceSerializer
 
 
-@csrf_exempt
-def entrance_list(request):
-    """
-    List all code entrance, or create a new entrance.
-    :param request:
-    """
-    if request.method == 'GET':
-        entrance = Entrance.objects.all()
-        serializer = EntranceSerializer(entrance, many=True)
-        return JSONResponse(serializer.data)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = EntranceSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JSONResponse(serializer.data, status=201)
-        return JSONResponse(serializer.errors, status=400)
-
-
-@csrf_exempt
-def entrance_detail(request, pk):
-    """
-    Retrieve, update or delete a code entrance.
-    :param pk:
-    :param request:
-    """
-    try:
-        entrance = Entrance.objects.get(pk=pk)
-    except Entrance.DoesNotExist:
-        return HttpResponse(status=404)
-
-    if request.method == 'DELETE':
-        entrance.delete()
-        return HttpResponse(status=204)
-
-    if request.method == 'GET':
-        serializer = EntranceSerializer(entrance)
-        return JSONResponse(serializer.data)
-
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = EntranceSerializer(entrance, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JSONResponse(serializer.data)
-        return JSONResponse(serializer.errors, status=400)
-
-
-class JSONResponse(HttpResponse):
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
 
 
 
