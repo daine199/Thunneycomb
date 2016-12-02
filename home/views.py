@@ -21,27 +21,12 @@ def index(request):
         return render(request, 'home/index.html')
     if request.method == 'POST':
         app_name = request.POST.get('app_name').lower()
-
-        if app_name in access_entry:
-            if app_name == "login":
-                return redirect('/admin/login/?next=/')
-            if app_name == "wiki":
-                return redirect('/admin/login/?next=/wiki')
-            return redirect("/" + app_name)
-
-        if app_name == "admin":
-            if request.user.is_authenticated():
-                return redirect("/" + app_name)
-            else:
-                return render(request, 'home/index.html')
-
-        else:
-            try:
-                ent = Entrance.objects.get(entrance=app_name)
-            except exceptions.ObjectDoesNotExist:
-                context = {"error": "Invalid Entrance {}".format(app_name)}
-                return render(request, 'home/index.html', context)
-            return redirect(ent.entrance_url)
+        try:
+            ent = Entrance.objects.get(entrance=app_name)
+        except exceptions.ObjectDoesNotExist:
+            context = {"error": "Invalid Entrance {}".format(app_name)}
+            return render(request, 'home/index.html', context)
+        return redirect(ent.entrance_url)
 
 
 def login_processor(request):
