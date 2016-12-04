@@ -14,6 +14,7 @@ import os
 from .appsetting.wiki_settings import *
 from .appsetting.rest_settings import *
 from .appsetting.platycodon_settings import *
+from .db_setting.postgre_db import POSTGRESQL_DB
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,26 +86,7 @@ SITE_ID = 1
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-
-if DEBUG is True:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'thunneycomb_db',
-            'USER': 'thunneycomb_user',
-            'PASSWORD': 'HyF72468',
-            'HOST': '127.0.0.1',
-            'PORT': '5432',
-        }
-    }
+DATABASES = POSTGRESQL_DB
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
