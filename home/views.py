@@ -1,13 +1,12 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from .models import Entrance
 from django.core import exceptions
 from django.shortcuts import redirect
 from django.contrib.auth import logout
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 from rest_framework import viewsets
 from .serializers import EntranceSerializer
 
@@ -23,6 +22,17 @@ def index(request):
         try:
             ent = Entrance.objects.get(entrance=app_name)
         except exceptions.ObjectDoesNotExist:
+            # 同一IP多次请求非法入口时拒绝服务并跳转外站
+            invalid_ip = str(request.META.get("REMOTE_ADDR", None))
+            invalid_time = request.session.get(invalid_ip, 1)
+            if int(invalid_time) > 3:
+                try:
+                    ent = Entrance.objects.get(entrance="get_out")
+                    out_site = ent.entrance_url
+                except exceptions.ObjectDoesNotExist:
+                    out_site = "http://www.baidu.com"
+                return redirect(out_site)
+            request.session[invalid_ip] = (invalid_time + 1)
             context = {"error": "Invalid Entrance {}".format(app_name)}
             return render(request, 'home/index.html', context)
         return redirect(ent.entrance_url)
