@@ -5,10 +5,15 @@ from rest_framework import routers
 
 
 urlpatterns = [
-    url(r'^$', views.index, name='homepage'),
+    url(r'^$', views.entrance, name='entrance_page'),
     url(r'^logout/$', views.logout_processor, name='logout_processor')
 ]
 
+urlpatterns += [
+    url(r'^index/$', views.index, name='index_page'),
+]
+
+# REST ROUTER
 router = routers.DefaultRouter()
 router.register('HomeEntrance', views.EntranceViewSet)
 router.register('PlatycodonEntrance', PlatycodonViewSet)

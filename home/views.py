@@ -14,9 +14,9 @@ from .serializers import EntranceSerializer
 # Create your views here.
 
 
-def index(request):
+def entrance(request):
     if request.method == 'GET':
-        return render(request, 'home/index.html')
+        return render(request, 'home/entrance.html')
     if request.method == 'POST':
         app_name = request.POST.get('app_name').lower()
         try:
@@ -34,7 +34,7 @@ def index(request):
                 return redirect(out_site)
             request.session[invalid_ip] = (invalid_time + 1)
             context = {"error": "Invalid Entrance {}".format(app_name)}
-            return render(request, 'home/index.html', context)
+            return render(request, 'home/entrance.html', context)
         return redirect(ent.entrance_url)
 
 
@@ -58,6 +58,10 @@ class EntranceViewSet(viewsets.ModelViewSet):
     queryset = Entrance.objects.all()
     serializer_class = EntranceSerializer
 
+
+def index(request):
+    if request.method == 'GET':
+        return render(request, 'home/index.html')
 
 
 
