@@ -61,7 +61,10 @@ class EntranceViewSet(viewsets.ModelViewSet):
 
 def index(request):
     if request.method == 'GET':
-        return render(request, 'home/index.html')
+        if request.user.is_authenticated():
+            return render(request, 'home/index.html')
+        else:
+            return redirect("/")
 
 
 
