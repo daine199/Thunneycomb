@@ -7,6 +7,8 @@ __pycache__/
 *.pyc
 .idea
 db.sqlite3
+db_setting
+db_setting/postgre_db.py
 
 # C extensions
 *.so
