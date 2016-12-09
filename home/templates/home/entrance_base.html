@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>霹雳蜂巢 - Thuneycomb</title>
+    <meta name="keywords" content="Daine's Home" />
+    <meta name="description" content="Daine's Home" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'home/css/entrance.css' %}">
+</head>
+<style>
+    body{
+    background: #2f3238 url({% static "home/img/bg_texture.png" %}) no-repeat center;
+    font-family: "Fjalla One", sans-serif;
+    color: #ffffff;
+    }
+</style>
+
+<body>
+
+{% block body_content %}    {% endblock %}
+
+</body>
+</html>
