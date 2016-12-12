@@ -73,14 +73,6 @@ def login_user(request, *args, **kwargs):
             return render(request, 'home/login.html', context)
 
 
-def login_processor(request):
-    if request.method == 'GET':
-        if request.user.is_authenticated():
-            return redirect("/")
-        else:
-            return redirect("/login_page")
-
-
 def logout_processor(request):
     if request.user.is_authenticated():
         logout(request)
