@@ -6,6 +6,7 @@ from rest_framework import routers
 
 urlpatterns = [
     url(r'^$', views.entrance, name='entrance_page'),
+    url(r'^account/login/$', views.login_user, name='login_page'),
     url(r'^logout/$', views.logout_processor, name='logout_processor')
 ]
 

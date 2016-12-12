@@ -5,7 +5,9 @@ from django.shortcuts import render
 from .models import Entrance
 from django.core import exceptions
 from django.shortcuts import redirect
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
+
 
 from rest_framework import viewsets
 from .serializers import EntranceSerializer
@@ -38,6 +40,39 @@ def entrance(request):
         return redirect(ent.entrance_url)
 
 
+def login_user(request, *args, **kwargs):
+    if request.method == 'GET':
+        next_page = request.GET.get('next')
+        if not request.user.is_authenticated():
+            if next_page is not None:
+                request.session['next'] = next_page
+            return render(request, 'home/login.html')
+        else:
+            if next_page is not None:
+                return redirect("./{next}".format(next=next_page))
+            else:
+                return redirect("/")
+    if request.method == 'POST':
+        userid = request.POST.get('userid')
+        password = request.POST.get('password')
+        user = authenticate(username=userid, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                next_page = request.session.get('next', '/')
+                print(next_page)
+                if next_page is not None:
+                    return redirect("{next}".format(next=next_page))
+                else:
+                    return redirect("/")
+            else:
+                context = {"error": "Disable UserID {}".format(userid)}
+                return render(request, 'home/login.html', context)
+        else:
+            context = {"error": "Unknown UserID {}".format(userid)}
+            return render(request, 'home/login.html', context)
+
+
 def login_processor(request):
     if request.method == 'GET':
         if request.user.is_authenticated():
@@ -54,11 +89,13 @@ def logout_processor(request):
         return redirect("/")
 
 
+@login_required()
 class EntranceViewSet(viewsets.ModelViewSet):
     queryset = Entrance.objects.all()
     serializer_class = EntranceSerializer
 
 
+@login_required()
 def index(request):
     if request.method == 'GET':
         if request.user.is_authenticated():

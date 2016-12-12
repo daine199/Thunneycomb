@@ -131,6 +131,7 @@ else:
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+LOGIN_URL = "/account/login/"
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 

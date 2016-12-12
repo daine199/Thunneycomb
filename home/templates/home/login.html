@@ -1,27 +1,53 @@
-<{% extends "home/entrance_base.html" %}
+{% extends "home/entrance_base.html" %}
 {% load staticfiles %}
 
+{% block extend_css%}
+<link rel="stylesheet" href="{% static 'home/css/login.css' %}">
+{% endblock%}
+
 {% block body_content %}
-    <div class="error-block">
-        {% if error%}
-        {{ error }}
-        {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                    <label>
+                        Enter the email you signed up with</label>
+                    <input type="email" placeholder="Email" />
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                    Sign In</p>
+                <form class="login" action='./' method="post">
+                    {% csrf_token %}
+                <input type="text" placeholder="{{ error|default:'Username' }}" name="userid"/>
+                <input type="password" placeholder="Password" name="password"/>
+                    <!--<div class="fa-border">-->
+                            <!--{% if error%}-->
+                            <!--{{ error }}-->
+                            <!--{% endif %}-->
+                    <!--</div>-->
+                <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
+                    <div class="remember-forgot">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" />
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 forgot-pass-content">
+                            <a href="javascript:void(0)" class="forgot-pass">Forgot Password</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
-    {% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-    {% endif %}
-    <div class="search-block">
-        <form action="." method="POST">
-            {% csrf_token %}
-        <input type="text" placeholder="UserID" id="userid" name="userid"/>
-        <input type="password" placeholder="Password" id="passwd" name="password"/>
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
-    </div>
+</div>
 {% endblock %}
