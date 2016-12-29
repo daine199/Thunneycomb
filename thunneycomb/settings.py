@@ -11,26 +11,31 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import linecache
+from .env_check import get_env
 from .appsetting.wiki_settings import *
 from .appsetting.rest_settings import *
 from .appsetting.platycodon_settings import *
-from .db_setting.postgre_db import POSTGRESQL_DB
+from .db_setting.mysql_db import MYSQL_DB
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'kv%nxx(07o53+&__xvse93+v_!*(o4kcds$#ifyg0_*7omak_c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-if DEBUG is False:
-    TEMPLATE_DEBUG = False
+CURRENT_ENV = get_env()
+if 'product' == CURRENT_ENV:
+    DEBUG = False
+    DATABASES = MYSQL_DB
+else:
+    DEBUG = True
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 ALLOWED_HOSTS = ['*']
 
@@ -84,10 +89,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'thunneycomb.wsgi.application'
 
 SITE_ID = 1
-
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = POSTGRESQL_DB
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

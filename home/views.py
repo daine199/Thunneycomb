@@ -6,7 +6,7 @@ from .models import Entrance
 from django.core import exceptions
 from django.shortcuts import redirect
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 from rest_framework import viewsets
@@ -49,7 +49,7 @@ def login_user(request, *args, **kwargs):
             return render(request, 'home/login.html')
         else:
             if next_page is not None:
-                return redirect("./{next}".format(next=next_page))
+                return redirect("/{next}".format(next=next_page))
             else:
                 return redirect("/")
     if request.method == 'POST':

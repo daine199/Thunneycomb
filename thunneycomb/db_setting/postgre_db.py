@@ -1,4 +1,5 @@
 # PostgreSQL DB Settings
+
 POSTGRESQL_DB = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
