@@ -9,5 +9,4 @@ Markdown==2.6.7
 Pillow==3.4.2
 six==1.10.0
 sorl-thumbnail==12.3
-uWSGI==2.0.14
 wiki==0.1.2
