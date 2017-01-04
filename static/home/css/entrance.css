@@ -27,7 +27,7 @@
     margin-left: -150px;
     width: 300px;
     color:#ffffff;
-    font-size: 4em;
+    font-size: 2.5em;
     text-align: center;
 }
 @media screen and (max-device-width: 600px){
@@ -39,6 +39,6 @@
         font-size: 1.5em;
     }
     .error-block {
-        font-size: 2.5em;
+        font-size: 1.5em;
     }
 }
