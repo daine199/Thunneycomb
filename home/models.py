@@ -6,7 +6,6 @@
 # Modify 2016-11-23
 """
 from django.db import models
-from django.contrib.auth.models import User, Permission
 
 
 class Entrance(models.Model):
