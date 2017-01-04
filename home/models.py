@@ -15,15 +15,10 @@ class Entrance(models.Model):
 
     class Meta:
         permissions = (
-            ("can_view", "Can see entrance permission"),
+            ("view_Entrance", "Can see entrance"),
         )
 
     def __str__(self):
         return self.entrance
-
-
-class EntrancePermission(models.Model):
-    user = models.ForeignKey(User)
-    has_index_perm = models.BooleanField()
 
 
