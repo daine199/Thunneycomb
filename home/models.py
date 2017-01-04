@@ -14,7 +14,7 @@ class Entrance(models.Model):
 
     class Meta:
         permissions = (
-            ("view_Entrance", "Can see entrance"),
+            ("view_entrance", "Can see entrance"),
         )
 
     def __str__(self):
