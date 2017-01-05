@@ -26,7 +26,7 @@ def check_deploy_perms(user):
     """
     #  TODO 在之后Thunneyconmb如果添加了权限管理APP，则可以替换相应权限需求。目前部署暂时用sites替代。
     permission_required = deploy_perms_static()
-    deploy_perms = user.has_perm(permission_required)
+    deploy_perms = user.has_perms(permission_required)
     return deploy_perms
 
 
