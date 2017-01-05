@@ -88,7 +88,7 @@ def logout_processor(request):
 def deploy_entrance(request):
     if request.method == 'GET':
         #  TODO add deploy template and render a post page
-        return redirect("/")
+        return render(request, 'home/deploy.html')
     if request.method == 'POST':
         if check_deploy_perms(request.user):
             #  TODO Do something deploy

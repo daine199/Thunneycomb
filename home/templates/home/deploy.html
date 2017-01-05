@@ -1,0 +1,31 @@
+{% extends "home/entrance_base.html" %}
+{% load staticfiles %}
+
+{% block extend_css%}
+<link rel="stylesheet" href="{% static 'home/css/login.css' %}">
+{% endblock%}
+
+{% block body_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="wrap">
+                <p class="form-title">
+                    Sign In</p>
+                <form class="login" action='./' method="post">
+                    {% csrf_token %}
+                <input type="text" placeholder="{{ error|default:'Thunneycomb' }}" name="app_name"/>
+                <input type="text" placeholder="Deploy Version" name="app_version"/>
+                    <!--<div class="fa-border">-->
+                            <!--{% if error%}-->
+                            <!--{{ error }}-->
+                            <!--{% endif %}-->
+                    <!--</div>-->
+                <input type="submit" value="Deploy" class="btn btn-success btn-sm" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
