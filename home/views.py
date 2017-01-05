@@ -6,8 +6,9 @@ from .models import Entrance
 from django.core import exceptions
 from django.shortcuts import redirect
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.decorators import login_required, permission_required
-
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from .lib.deploy_tool import check_deploy_perms, deploy_app
 
 from rest_framework import viewsets
 from .serializers import EntranceSerializer
@@ -82,6 +83,25 @@ def logout_processor(request):
 
 
 @login_required()
+def deploy_entrance(request):
+    if request.method == 'GET':
+        #  TODO add deploy template and render a post page
+        return redirect("/")
+    if request.method == 'POST':
+        if check_deploy_perms(request.user):
+            #  TODO Do something deploy
+            app_name = request.POST.get('app_name').lower()
+            deploy_app(app_name)
+            #  TODO rewrite deploy loading page.
+            return redirect("/")
+        else:
+            context = {"error": "No Deploy Access."}
+            return render(request, 'home/entrance.html', context)
+    else:
+        return redirect(reverse('home.index_page'))
+
+
+@login_required()
 class EntranceViewSet(viewsets.ModelViewSet):
     queryset = Entrance.objects.all()
     serializer_class = EntranceSerializer
@@ -94,9 +114,5 @@ def index(request):
             return render(request, 'home/index.html')
         else:
             return redirect("/")
-
-
-
-
 
 
