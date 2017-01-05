@@ -83,8 +83,7 @@ def logout_processor(request):
         return redirect("/")
 
 
-# @login_required()
-@csrf_exempt
+@login_required()
 def deploy_entrance(request):
     if request.method == 'GET':
         #  TODO add deploy template and render a post page
