@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Entrance
 from django.core import exceptions
@@ -9,6 +9,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from .lib.deploy_tool import check_deploy_perms, deploy_app
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework import viewsets
 from .serializers import EntranceSerializer
@@ -82,7 +83,8 @@ def logout_processor(request):
         return redirect("/")
 
 
-@login_required()
+# @login_required()
+@csrf_exempt
 def deploy_entrance(request):
     if request.method == 'GET':
         #  TODO add deploy template and render a post page
@@ -90,10 +92,11 @@ def deploy_entrance(request):
     if request.method == 'POST':
         if check_deploy_perms(request.user):
             #  TODO Do something deploy
-            app_name = request.POST.get('app_name').lower()
-            deploy_app(app_name)
+            app_name = request.POST.get('app_name')
+            app_version = request.POST.get('app_version')
+            res = deploy_app(app_name, app_version)
             #  TODO rewrite deploy loading page.
-            return redirect("/")
+            return HttpResponse(res)
         else:
             context = {"error": "No Deploy Access."}
             return render(request, 'home/entrance.html', context)

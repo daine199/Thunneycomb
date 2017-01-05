@@ -14,6 +14,11 @@ urlpatterns += [
     url(r'^index/$', views.index, name='index_page'),
 ]
 
+#  Deploy ROUTER
+urlpatterns += [
+    url(r'^deploy/$', views.deploy_entrance, name='deploy_entrance')
+]
+
 # REST ROUTER
 router = routers.DefaultRouter()
 router.register('HomeEntrance', views.EntranceViewSet)
