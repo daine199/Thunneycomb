@@ -33,10 +33,13 @@ if 'product' == CURRENT_ENV:
     DATABASES = MYSQL_DB
 else:
     DEBUG = True
+    user_path = os.getenv('HOME')
+    db_path = os.path.join(user_path, 'webapp/debug/db.sqlite3')
+    print("debug db {}".format(db_path))
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': db_path,
         }
     }
 

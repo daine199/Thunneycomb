@@ -4,5 +4,6 @@
 python manage.py makemigrations home
 python manage.py makemigrations platycodon
 
+python manage.py migrate
 python manage.py migrate home
 python manage.py migrate platycodon
