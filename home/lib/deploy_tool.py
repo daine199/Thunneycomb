@@ -31,9 +31,10 @@ def check_deploy_perms(user):
 
 
 def deploy_app(app_name='thunneycomb', version=None):
+    now = time.localtime()
+    ver_format = time.strftime("%Y.%m.%d_%H.%M", now)
+
     if 'thunneycomb' == app_name.lower():
-        now = time.localtime()
-        ver_format = time.strftime("%Y.%m.%d_%H.%M", now)
         if version is None:
             version = 'AutoDeploy.{0}'.format(ver_format)
         else:
@@ -41,8 +42,19 @@ def deploy_app(app_name='thunneycomb', version=None):
         cmd = "deploy.sh {0}".format(version)
         subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE)
         report_out = "{0} Deploying...".format(version)
+
+    if 'weimo' == app_name.lower():
+        if version is None:
+            version = 'Weimo_AutoDeploy.{0}'.format(ver_format)
+        else:
+            version = '{0}.{1}'.format(version, ver_format)
+        cmd = "bash /home/sophie.mao/bin/deploy.sh {0}".format(version)
+        subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE)
+        report_out = "{0} Deploying...".format(version)
+
     else:
         report_out = "{0} AutoDeploy unavailable. ".format(app_name)
+
     return report_out
 
 
