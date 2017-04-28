@@ -3,7 +3,7 @@
 # Daine.H
 from django.conf.urls import url
 
-from pet_api import views
+from . import views
 
 urlpatterns = [
     url(r'^api_test$', views.pet_get, name='pet_api'),
