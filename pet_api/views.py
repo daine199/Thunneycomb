@@ -8,4 +8,4 @@ import json
 def pet_get(request):
     if request.method == 'GET':
         content = {'this': 'Pet API GET Tests', 'method': request.method}
-    return HttpResponse(json.dumps(content))
+    return HttpResponse(json.dumps(content), content_type='application/javascript;charset=utf-8')
