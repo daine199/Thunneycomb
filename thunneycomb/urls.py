@@ -65,6 +65,11 @@ urlpatterns += [
     url(r'^ckeditor/', include('ckeditor_uploader.urls'))
 ]
 
+# pet_api URL
+urlpatterns += [
+    url(r'pet_api/', include('pet_api.urls', namespace='pet_api')),
+]
+
 # DEV static settings
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
