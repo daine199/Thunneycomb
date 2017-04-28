@@ -9,7 +9,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from .lib.deploy_tool import check_deploy_perms, deploy_app
-from django.views.decorators.csrf import csrf_exempt
+
 
 from rest_framework import viewsets
 from .serializers import EntranceSerializer
@@ -63,6 +63,7 @@ def login_user(request, *args, **kwargs):
                 login(request, user)
                 next_page = request.session.get('next', '/')
                 print(next_page)
+                request.session['userid'] = userid
                 if next_page is not None:
                     return redirect("{next}".format(next=next_page))
                 else:
@@ -83,6 +84,8 @@ def logout_processor(request):
         return redirect("/")
 
 
+# 1.If the user isn’t logged in, redirect to settings.LOGIN_URL, passing the current absolute path in the query string.
+# 2.If the user is logged in, execute the view normally. The view code is free to assume the user is logged in.
 @login_required()
 def deploy_entrance(request):
     if request.method == 'GET':
