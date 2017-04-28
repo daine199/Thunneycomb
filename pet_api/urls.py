@@ -6,5 +6,5 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^api_test$', views.apt_test, name='pet_api'),
+    url(r'^api-test$', views.apt_test, name='pet_api'),
 ]
