@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+
+from thunneycomb.appsetting.pet_api_settings import PET_APPS
 from .env_check import get_env
 from .appsetting.wiki_settings import *
 from .appsetting.rest_settings import *
@@ -149,4 +151,5 @@ ADMIN_SITE_HEADER = "Thunneycomb Admin"
 INSTALLED_APPS += WIKI_APPS
 INSTALLED_APPS += REST_APPS
 INSTALLED_APPS += PLATYCODON_APPS
+INSTALLED_APPS += PET_APPS
 

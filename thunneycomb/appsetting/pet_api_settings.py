@@ -1,0 +1,7 @@
+# PLATYCODON BLOG SYSTEM SETTINGS
+
+PET_APPS = [
+    'pet_api',
+]
+
+
