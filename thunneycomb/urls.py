@@ -67,7 +67,7 @@ urlpatterns += [
 
 # pet_api URL
 urlpatterns += [
-    url(r'^pet_api/', include('pet_api.urls', namespace='pet_api'))
+    url(r'^pet-api/', include('pet_api.urls', namespace='pet_api'))
 ]
 
 # DEV static settings
