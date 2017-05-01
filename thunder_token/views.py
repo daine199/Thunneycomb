@@ -1,7 +1,9 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import authenticate, login
 
 from django.http import HttpResponse
 import json
@@ -43,6 +45,7 @@ def token_login(request):
         try:
             user_obj = User.objects.get(id=token.user_id)
             content['User_search'] = True
+            # 此处用的是authenticate接口方法， 该接口会查询settings中设定的backend，用匹配的方法实现鉴权
             user = authenticate(token=user_obj.auth_token.key)
             login(request, user)
         except User.DoesNotExist:
