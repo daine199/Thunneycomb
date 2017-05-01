@@ -19,6 +19,7 @@ from .env_check import get_env
 from .appsetting.wiki_settings import *
 from .appsetting.rest_settings import *
 from .appsetting.platycodon_settings import *
+from .appsetting.thunder_tokenbackend_settings import *
 from .db_setting.mysql_db import MYSQL_DB
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -153,4 +154,5 @@ INSTALLED_APPS += WIKI_APPS
 INSTALLED_APPS += REST_APPS
 INSTALLED_APPS += PLATYCODON_APPS
 INSTALLED_APPS += PET_APPS
+INSTALLED_APPS += THUNDER_TOKEN
 
