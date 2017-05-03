@@ -9,7 +9,9 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from .lib.deploy_tool import check_deploy_perms, deploy_app
-from django.views.decorators.csrf import csrf_exempt
+import json
+import logging
+
 
 from rest_framework import viewsets
 from .serializers import EntranceSerializer
@@ -17,19 +19,28 @@ from .serializers import EntranceSerializer
 
 # Create your views here.
 
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 
 def entrance(request):
     if request.method == 'GET':
+        logger.info('Get to the Entrance.')
         return render(request, 'home/entrance.html')
     if request.method == 'POST':
         app_name = request.POST.get('app_name').lower()
+        logger.info('Got APP {app_name}'.format(app_name=app_name))
         try:
+            logger.info('Try Find {app_name} Entrance.'.format(app_name=app_name))
             ent = Entrance.objects.get(entrance=app_name)
+            logger.info('Got {app_name} Entrance.'.format(app_name=app_name))
         except exceptions.ObjectDoesNotExist:
             # 同一IP多次请求非法入口时拒绝服务并跳转外站
+            logger.warning('{app_name} Entrance not found.'.format(app_name=app_name))
             invalid_ip = str(request.META.get("REMOTE_ADDR", None))
             invalid_time = request.session.get(invalid_ip, 1)
             if int(invalid_time) > 3:
+                logger.error('Wrong Entrance input > 3, Reject requests.')
                 try:
                     ent = Entrance.objects.get(entrance="get_out")
                     out_site = ent.entrance_url
@@ -118,3 +129,12 @@ def index(request):
             return redirect("/")
 
 
+def my_view(request):
+    print(__name__)
+    content = {"logging": True}
+    logger.info('info')
+    logger.debug('debug! ')
+    logger.warning('warning')
+    logger.error('error')
+    logger.critical('critical')
+    return HttpResponse(json.dumps(content), content_type='application/javascript;charset=utf-8')

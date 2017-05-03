@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+from thunneycomb.appsetting.logging_settings import THUNNEYCOMB_LOGGING
 from thunneycomb.appsetting.pet_api_settings import PET_APPS
 from .env_check import get_env
 from .appsetting.wiki_settings import *
@@ -31,6 +32,8 @@ SECRET_KEY = 'kv%nxx(07o53+&__xvse93+v_!*(o4kcds$#ifyg0_*7omak_c'
 # SECURITY WARNING: don't run with debug turned on in production!
 CURRENT_ENV = get_env()
 print(CURRENT_ENV)
+LOGGING = THUNNEYCOMB_LOGGING
+
 if 'product' == CURRENT_ENV:
     DEBUG = False
     DATABASES = MYSQL_DB

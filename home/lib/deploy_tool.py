@@ -1,11 +1,17 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import shlex
-
+import logging
 import copy
 import subprocess
 
 import time
+
+
+# Get an instance of a logger
+
+
+logger = logging.getLogger(__name__)
 
 
 def deploy_perms_static():

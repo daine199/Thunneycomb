@@ -28,3 +28,8 @@ urlpatterns += [
     url(r'^rest/', include(router.urls))
 ]
 
+# logging test
+urlpatterns += [
+    url(r'^logging$', views.my_view)
+]
+
