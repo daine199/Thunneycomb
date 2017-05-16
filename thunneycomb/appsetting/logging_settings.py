@@ -56,18 +56,7 @@ THUNNEYCOMB_LOGGING = {
         'pet_api.views': {
             'handlers': ['error', 'debug'],
             'level': 'DEBUG',
-            # 'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': True,
         },
-        # 'django': {
-        #     'handlers': ['trace', 'error', 'debug'],
-        #     # 'level': 'INFO',
-        #     'propagate': True,
-        # },
-
-        # 'django': {
-        #     'handlers': ['console'],
-        #     'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-        # }
     },
 }
