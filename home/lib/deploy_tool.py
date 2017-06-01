@@ -34,6 +34,14 @@ def deploy_app(app_name='thunneycomb', version=None):
     now = time.localtime()
     ver_format = time.strftime("%Y.%m.%d_%H.%M", now)
 
+    # noinspection PyBroadException
+    try:
+        if len(app_name) < 1:
+            app_name = 'thunneycomb'
+    except Exception:
+        app_name = 'thunneycomb'
+        version = None
+
     if 'thunneycomb' == app_name.lower():
         if version is None:
             version = 'AutoDeploy.{0}'.format(ver_format)
