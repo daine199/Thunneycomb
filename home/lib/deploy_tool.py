@@ -38,6 +38,8 @@ def deploy_app(app_name='thunneycomb', version=None):
     try:
         if len(app_name) < 1:
             app_name = 'thunneycomb'
+        if len(version) < 1:
+            version = None
     except Exception:
         app_name = 'thunneycomb'
         version = None
