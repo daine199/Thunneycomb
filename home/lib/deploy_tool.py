@@ -40,6 +40,16 @@ def deploy_app(app_name='thunneycomb', version=None):
     now = time.localtime()
     ver_format = time.strftime("%Y.%m.%d_%H.%M", now)
 
+    # noinspection PyBroadException
+    try:
+        if len(app_name) < 1:
+            app_name = 'thunneycomb'
+        if len(version) < 1:
+            version = None
+    except Exception:
+        app_name = 'thunneycomb'
+        version = None
+
     if 'thunneycomb' == app_name.lower():
         if version is None:
             version = 'AutoDeploy.{0}'.format(ver_format)
@@ -49,7 +59,7 @@ def deploy_app(app_name='thunneycomb', version=None):
         subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE)
         report_out = "{0} Deploying...".format(version)
 
-    if 'weimo' == app_name.lower():
+    elif 'weimo' == app_name.lower():
         if version is None:
             version = 'Weimo_AutoDeploy.{0}'.format(ver_format)
         else:

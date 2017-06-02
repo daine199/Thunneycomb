@@ -13,6 +13,8 @@ import json
 import logging
 
 
+from django.views.decorators.csrf import csrf_exempt
+import json
 from rest_framework import viewsets
 from .serializers import EntranceSerializer
 
@@ -53,6 +55,7 @@ def entrance(request):
         return redirect(ent.entrance_url)
 
 
+# @csrf_exempt
 def login_user(request, *args, **kwargs):
     if request.method == 'GET':
         next_page = request.GET.get('next')
@@ -138,3 +141,21 @@ def my_view(request):
     logger.error('error')
     logger.critical('critical')
     return HttpResponse(json.dumps(content), content_type='application/javascript;charset=utf-8')
+
+
+# @csrf_exempt
+# @login_required
+def post_test(request):
+    content = {'method': ''}
+    if request.method == 'GET':
+        # content['method'] = 'GET'
+        content['content'] = request.GET
+        # content['header'] = str(request.META)
+    if request.method == 'POST':
+        content['method'] = 'POST'
+        data = request.POST
+        # header = request.META
+        content['content'] = data
+        # content['header'] = str(header)
+        print(data)
+    return HttpResponse(json.dumps(content))

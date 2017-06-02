@@ -28,6 +28,10 @@ urlpatterns += [
     url(r'^rest/', include(router.urls))
 ]
 
+urlpatterns += [
+    url(r'^test/$', views.post_test)
+]
+
 # logging test
 urlpatterns += [
     url(r'^logging$', views.my_view)
