@@ -55,7 +55,7 @@ def deploy_app(app_name='thunneycomb', version=None):
             version = 'AutoDeploy.{0}'.format(ver_format)
         else:
             version = '{0}.{1}'.format(version, ver_format)
-        cmd = "deploy.sh {0}".format(version)
+        cmd = "bash /home/thunderbee/bin/deploy.sh {0}".format(version)
         subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE)
         report_out = "{0} Deploying...".format(version)
 
