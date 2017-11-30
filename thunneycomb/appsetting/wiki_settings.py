@@ -12,3 +12,5 @@ WIKI_APPS = [
     'wiki.plugins.images',
     'wiki.plugins.macros',
 ]
+
+WIKI_ATTACHMENTS_EXTENSIONS = ['pdf', 'doc', 'pptx', 'odt', 'docx', 'txt']
