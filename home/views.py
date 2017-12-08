@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Entrance
+from .models import Entrance, Switch
 from django.core import exceptions
 from django.shortcuts import redirect
 from django.contrib.auth import logout, authenticate, login
@@ -32,11 +32,24 @@ def entrance(request):
     if request.method == 'POST':
         app_name = request.POST.get('app_name').lower()
         logger.info('Got APP {app_name}'.format(app_name=app_name))
+
         try:
             logger.info('Try Find {app_name} Entrance.'.format(app_name=app_name))
             ent = Entrance.objects.get(entrance=app_name)
             logger.info('Got {app_name} Entrance.'.format(app_name=app_name))
         except exceptions.ObjectDoesNotExist:
+            logger.info('Got {app_name} Entrance Failed.'.format(app_name=app_name))
+
+        try:
+            logger.info('Check wiki Search Switch.')
+            wiki_search_key = Switch.objects.get(switch_key="is_wiki_search_open")
+        except exceptions.ObjectDoesNotExist:
+            logger.info('wiki Search Switch Disable.')
+            wiki_search_key = False
+
+        if wiki_search_key:
+            return redirect("./wiki/_search/?q={0}".format(app_name))
+        else:
             # 同一IP多次请求非法入口时拒绝服务并跳转外站
             logger.warning('{app_name} Entrance not found.'.format(app_name=app_name))
             invalid_ip = str(request.META.get("REMOTE_ADDR", None))
