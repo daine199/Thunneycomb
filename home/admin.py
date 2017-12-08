@@ -9,7 +9,7 @@ class EntranceAdmin(admin.ModelAdmin):
 
 
 class SwitchAdmin(admin.ModelAdmin):
-    list_display = ('switch_key', 'Switch_value')
+    list_display = ('switch_key', 'switch_value')
 
 
 admin.site.register(Entrance, EntranceAdmin)

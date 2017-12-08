@@ -23,7 +23,7 @@ class Entrance(models.Model):
 
 class Switch(models.Model):
     switch_key = models.CharField(max_length=128)
-    Switch_value = models.BooleanField(default=False, verbose_name="Status")
+    switch_value = models.BooleanField(default=False, verbose_name="Status")
 
     def __str__(self):
-        return self.switch_key
+        return str(self.switch_value)

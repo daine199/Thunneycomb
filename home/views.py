@@ -38,18 +38,24 @@ def entrance(request):
             ent = Entrance.objects.get(entrance=app_name)
             logger.info('Got {app_name} Entrance.'.format(app_name=app_name))
         except exceptions.ObjectDoesNotExist:
+            ent = None
             logger.info('Got {app_name} Entrance Failed.'.format(app_name=app_name))
 
         try:
             logger.info('Check wiki Search Switch.')
             wiki_search_key = Switch.objects.get(switch_key="is_wiki_search_open")
+            logger.info('is_wiki_search_open: {}'.format(wiki_search_key.switch_value))
         except exceptions.ObjectDoesNotExist:
             logger.info('wiki Search Switch Disable.')
             wiki_search_key = False
 
-        if wiki_search_key:
-            return redirect("./wiki/_search/?q={0}".format(app_name))
+        if ent is not None:
+            return redirect(ent.entrance_url)
         else:
+
+            if True is wiki_search_key.switch_value:
+                return redirect("./wiki/_search/?q={0}".format(app_name))
+
             # 同一IP多次请求非法入口时拒绝服务并跳转外站
             logger.warning('{app_name} Entrance not found.'.format(app_name=app_name))
             invalid_ip = str(request.META.get("REMOTE_ADDR", None))
