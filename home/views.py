@@ -9,11 +9,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from .lib.deploy_tool import check_deploy_perms, deploy_app
-import json
 import logging
-
-
-from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework import viewsets
 from .serializers import EntranceSerializer

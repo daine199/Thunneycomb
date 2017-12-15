@@ -53,6 +53,21 @@ THUNNEYCOMB_LOGGING = {
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
             'propagate': True,
         },
+        'send_submail_sms': {
+            'handlers': ['trace', 'error', 'console', 'warning'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
+        'thunder_token': {
+            'handlers': ['trace', 'error', 'console', 'warning'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
+        'thunder_customer': {
+            'handlers': ['trace', 'error', 'console', 'warning'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
         'pet_api.views': {
             'handlers': ['error', 'debug'],
             'level': 'DEBUG',
@@ -60,3 +75,5 @@ THUNNEYCOMB_LOGGING = {
         },
     },
 }
+
+NOW_STRFTIME = '%Y-%m-%d %H:%M:%S'
