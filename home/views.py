@@ -70,7 +70,6 @@ def entrance(request):
         return redirect(ent.entrance_url)
 
 
-# @csrf_exempt
 def login_user(request, *args, **kwargs):
     if request.method == 'GET':
         next_page = request.GET.get('next')
