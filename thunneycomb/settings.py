@@ -22,7 +22,7 @@ from .appsetting.rest_settings import *
 from .appsetting.platycodon_settings import *
 from .appsetting.thunder_tokenbackend_settings import *
 from .appsetting.thunder_customer_settings import *
-from .appsetting.send_submail_sms_settings import *
+from .appsetting.basis_components_settings import *
 from .db_setting.mysql_db import MYSQL_DB
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -141,12 +141,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 # MEDIA_ROOT = "/var/www/thunneycomb/media"
-if DEBUG is False:
-    MEDIA_ROOT = "/var/www/thunneycomb/media/"
-    STATIC_ROOT = "/var/www/thunneycomb/static/"
-else:
+if DEBUG:
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
     STATIC_ROOT = os.path.join(BASE_DIR, "static")
+else:
+    MEDIA_ROOT = "/var/www/thunneycomb/media/"
+    STATIC_ROOT = "/var/www/thunneycomb/static/"
 
 LOGIN_URL = "/account/login/"
 MEDIA_URL = "/media/"
@@ -161,5 +161,5 @@ INSTALLED_APPS += PLATYCODON_APPS
 INSTALLED_APPS += PET_APPS
 INSTALLED_APPS += THUNDER_TOKEN
 INSTALLED_APPS += THUNDER_CUSTOMER
-INSTALLED_APPS += SEND_MAILS
+INSTALLED_APPS += BASE_COMPONENTS
 

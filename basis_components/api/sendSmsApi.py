@@ -104,3 +104,27 @@ def get_sms_sender(sender_name=None):
             logger.warning("Sender {} not found.".format(sender_name))
     return sender
 
+
+def init_default_sender():
+    try:
+        sender = SmsSender.objects.get(id=1)
+        logger.warning("init sender to default value.")
+    except ObjectDoesNotExist:
+        logger.warning("sender init passivity.")
+        sender = SmsSender(sender_name=settings.SMS_SENDER['sender_name'],
+                           sender_url=settings.SMS_MAIN_URL,
+                           app_id=settings.SMS_SENDER['appid'],
+                           secret=settings.SMS_SENDER['signature'],
+                           template_id=settings.SMS_SENDER['project'],
+                           template=settings.SMS_SENDER['vars'])
+        sender.id = 1
+
+    sender.sender_name = settings.SMS_SENDER['sender_name']
+    sender.sender_url = settings.SMS_MAIN_URL
+    sender.app_id = settings.SMS_SENDER['appid']
+    sender.secret = settings.SMS_SENDER['signature']
+    sender.template_id = settings.SMS_SENDER['project']
+    sender.template = settings.SMS_SENDER['vars']
+
+    sender.save()
+

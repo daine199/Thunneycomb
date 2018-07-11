@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
 
@@ -35,9 +36,15 @@ def create_token(request):
     return HttpResponse(json.dumps(content), content_type='application/javascript;charset=utf-8')
 
 
+@csrf_exempt
 def token_login(request):
-    content = {'this': 'token_login', 'method': request.method}
-    token_key = request.GET.get('token')
+    content = {'this': 'token_login', 'method': request.method, "Token_search": False, "User_search": False}
+    token_key = ""
+
+    if "GET" == request.method:
+        token_key = request.GET.get('token')
+    if "POST" == request.method:
+        token_key = request.POST.get('token')
 
     try:
         token = Token.objects.get(key=token_key)
@@ -52,6 +59,6 @@ def token_login(request):
             content['User_search'] = False
 
     except Token.DoesNotExist:
-        content['token_search'] = False
+        content['Token_search'] = False
 
     return HttpResponse(json.dumps(content), content_type='application/javascript;charset=utf-8')

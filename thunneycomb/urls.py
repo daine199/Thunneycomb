@@ -63,6 +63,11 @@ urlpatterns += [
     url(r'^thunder-token/', include('thunder_token.urls', namespace='thunder_token'))
 ]
 
+# basis_components
+urlpatterns += [
+    url(r'^basis-components/', include('basis_components.urls', namespace='basis_components'))
+]
+
 # DEV static settings
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

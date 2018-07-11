@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Entrance, Switch
 from django.core import exceptions
 from django.shortcuts import redirect
@@ -146,7 +148,10 @@ def index(request):
             return redirect("/")
 
 
+@csrf_exempt
 def my_view(request):
+    print(request.method == "POST")
+    print(request.method == "GET")
     print(__name__)
     content = {"logging": True}
     logger.info('info')

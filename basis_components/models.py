@@ -20,17 +20,26 @@ class MySubMail(models.Model):
     code_status = models.BooleanField(default=True)
     sender_name = models.CharField(max_length=18, blank=True)
 
-    def get_code_valid(self):
+    def get_code_valid(self, code=None):
         """
         校验验证码，调用后验证码无论是否正确都会直接失效。
         :return: Bool 校验结果
         """
         self.set_invalid_status()
+        check_status = False
+
+        # 校验时效
         if (time.time() - self.gen_time) <= float(self.valid_time):
-            logger.info('验证通过')
-            return True
+            logger.info('验证码未过期')
+            # 校验验证码输入
+            if code == self.code:
+                logger.info('验证码一致')
+                check_status = True
+            else:
+                check_status = False
         else:
-            return False
+            check_status = False
+        return check_status
 
     def set_invalid_status(self):
         self.code_status = False
