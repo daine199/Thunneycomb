@@ -8,5 +8,6 @@ from . import views
 
 urlpatterns = [
     url(r'^init-sms-sender/$', views.init_sms_sender, name='init_base_components'),
+    url(r'^send-sms/$', views.send_code, name='send_code'),
 
 ]
