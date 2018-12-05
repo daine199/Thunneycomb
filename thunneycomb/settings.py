@@ -42,15 +42,16 @@ if 'product' == CURRENT_ENV:
 else:
     DEBUG = True
     user_path = os.getenv('HOME')
-    db_path = os.path.join(user_path, 'webapp/debug/db.sqlite3')
+    db_path = os.path.join(user_path, 'webapp/debug')
+    db_file = "db.sqlite3"
     if not os.path.exists(db_path):
         os.makedirs(db_path)
-    print("debug db {}".format(db_path))
+    print("debug db {}".format(os.path.join(db_path, db_file)))
 
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': db_path,
+            'NAME': os.path.join(db_path, db_file),
         }
     }
 
