@@ -23,7 +23,6 @@ from .appsetting.platycodon_settings import *
 from .appsetting.thunder_tokenbackend_settings import *
 from .appsetting.thunder_customer_settings import *
 from .appsetting.basis_components_settings import *
-from .db_setting.mysql_db import MYSQL_DB
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,6 +37,7 @@ LOGGING = THUNNEYCOMB_LOGGING
 
 if 'product' == CURRENT_ENV:
     DEBUG = False
+    from .db_setting.mysql_db import MYSQL_DB
     DATABASES = MYSQL_DB
 else:
     DEBUG = True
