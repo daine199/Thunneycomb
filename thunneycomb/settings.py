@@ -43,6 +43,8 @@ else:
     DEBUG = True
     user_path = os.getenv('HOME')
     db_path = os.path.join(user_path, 'webapp/debug/db.sqlite3')
+    if not os.path.exists(db_path):
+        os.makedirs(db_path)
     print("debug db {}".format(db_path))
 
     DATABASES = {
