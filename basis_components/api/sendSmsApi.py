@@ -47,11 +47,16 @@ def gen_sms_obj(phone_no, code_length, valid_time, sender):
     """
     code = generate_verification_code(code_length)
     sender_body = assemble_sender_body(sender, phone_no, code, valid_time)
-    sms_send = requests.post(sender.sender_url, json=sender_body, headers=settings.SMS_HEADER)
-    if is_send_success(json.loads(sms_send.text)):
+
+    if settings.DEBUG:
         code_status = True
     else:
-        code_status = False
+        sms_send = requests.post(sender.sender_url, json=sender_body, headers=settings.SMS_HEADER)
+        if is_send_success(json.loads(sms_send.text)):
+            code_status = True
+        else:
+            code_status = False
+
     sms_obj = MySubMail(phone_no=phone_no,
                         code=code,
                         valid_time=valid_time,
@@ -106,9 +111,17 @@ def get_sms_sender(sender_name=None):
 
 
 def init_default_sender():
+    logger.warning("Force init default sender...")
+
     try:
         sender = SmsSender.objects.get(id=1)
         logger.warning("init sender to default value.")
+        sender.sender_name = settings.SMS_SENDER['sender_name']
+        sender.sender_url = settings.SMS_MAIN_URL
+        sender.app_id = settings.SMS_SENDER['appid']
+        sender.secret = settings.SMS_SENDER['signature']
+        sender.template_id = settings.SMS_SENDER['project']
+        sender.template = settings.SMS_SENDER['vars']
     except ObjectDoesNotExist:
         logger.warning("sender init passivity.")
         sender = SmsSender(sender_name=settings.SMS_SENDER['sender_name'],
@@ -118,13 +131,7 @@ def init_default_sender():
                            template_id=settings.SMS_SENDER['project'],
                            template=settings.SMS_SENDER['vars'])
         sender.id = 1
+    finally:
+        sender.save()
 
-    sender.sender_name = settings.SMS_SENDER['sender_name']
-    sender.sender_url = settings.SMS_MAIN_URL
-    sender.app_id = settings.SMS_SENDER['appid']
-    sender.secret = settings.SMS_SENDER['signature']
-    sender.template_id = settings.SMS_SENDER['project']
-    sender.template = settings.SMS_SENDER['vars']
-
-    sender.save()
-
+    logger.warning("Force init default sender done.")

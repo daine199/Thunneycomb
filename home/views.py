@@ -24,9 +24,7 @@ logger = logging.getLogger(__name__)
 
 
 def entrance(request):
-    if request.method == 'GET':
-        logger.info('Get to the Entrance.')
-        return render(request, 'home/entrance.html')
+
     if request.method == 'POST':
         app_name = request.POST.get('app_name').lower()
         logger.info('Got APP {app_name}'.format(app_name=app_name))
@@ -70,6 +68,9 @@ def entrance(request):
             context = {"error": "Invalid Entrance {}".format(app_name)}
             return render(request, 'home/entrance.html', context)
         return redirect(ent.entrance_url)
+    else:
+        logger.info('Get to the Entrance.')
+        return render(request, 'home/entrance.html')
 
 
 def login_user(request, *args, **kwargs):
