@@ -4,7 +4,6 @@ from django.contrib.admin import AdminSite
 from .models import Entrance, Switch, UserProfile
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
 
 # Register your models here.
 
@@ -25,24 +24,20 @@ class UserProfileInline(admin.StackedInline):
     verbose_name_plural = 'Ext Info'
 
 
-class TokenInline(admin.StackedInline):
-    model = Token
-    max_num = 1
-    can_delete = False
-    verbose_name_plural = 'Rest Auth Token'
+# class TokenInline(admin.StackedInline):
+#     model = Token
+#     max_num = 1
+#     can_delete = False
+#     verbose_name_plural = 'Rest Auth Token'
 
 
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'email', 'phone_number', "is_staff")
-    inlines = (UserProfileInline, TokenInline, )
+    # inlines = (UserProfileInline, TokenInline, )
 
     def phone_number(self, obj):
         return obj.userprofile.phone_number
-
-
-class TokenAdmin(admin.ModelAdmin):
-    list_display = ('user', 'key')
 
 
 # Re-register UserAdmin
@@ -52,7 +47,6 @@ admin.site.register(User, UserAdmin)
 admin_site.register(User, UserAdmin)
 admin_site.register(Entrance)
 admin_site.register(Switch)
-admin_site.register(Token, TokenAdmin)
 
 
 @admin.register(Entrance, Switch)
