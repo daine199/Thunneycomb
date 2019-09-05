@@ -20,7 +20,10 @@ from django.conf import settings
 urlpatterns = [
     path('', include('home.urls')),
 
-    # Wiki settings
+    # Platycodon URL Settings
+    path('platycodon/', include('platycodon.urls')),
+
+    # Wiki URL settings
     path('wiki/notifications/', include('django_nyt.urls')),
     path('wiki/', include('wiki.urls'))
 ]

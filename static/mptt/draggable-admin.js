@@ -81,23 +81,6 @@ django.jQuery(function($){
         }
     }
 
-    /* Thanks, Django */
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = $.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
     /*
      * FeinCMS Drag-n-drop tree reordering.
      * Based upon code by bright4 for Radiant CMS, rewritten for
@@ -248,7 +231,7 @@ django.jQuery(function($){
                                 pasted_on: pastedOn
                             },
                             headers: {
-                                'X-CSRFToken': getCookie('csrftoken')
+                                'X-CSRFToken': $('input[type=hidden][name=csrfmiddlewaretoken]').val()
                             },
                             method: 'POST'
                         });
@@ -268,7 +251,7 @@ django.jQuery(function($){
     /* Every time the user expands or collapses a part of the tree, we remember
        the current state of the tree so we can restore it on a reload. */
     function storeCollapsedNodes(nodes) {
-        window.sessionStorage && window.sessionStorage.setItem(
+        window.localStorage && window.localStorage.setItem(
             DraggableMPTTAdmin.storageName,
             JSON.stringify(nodes)
         );
@@ -276,7 +259,7 @@ django.jQuery(function($){
 
     function retrieveCollapsedNodes() {
         try {
-            return JSON.parse(window.sessionStorage.getItem(
+            return JSON.parse(window.localStorage.getItem(
                 DraggableMPTTAdmin.storageName
             ));
         } catch(e) {
@@ -352,6 +335,10 @@ django.jQuery(function($){
     };
 
     function keyboardNavigationHandler(event) {
+        // On form element? Ignore.
+        if (/textarea|select|input/i.test(event.target.nodeName))
+            return;
+
         // console.log('keydown', this, event.keyCode);
         switch (event.keyCode) {
             case 40: // down
@@ -415,7 +402,9 @@ django.jQuery(function($){
                 expandOrCollapseNode(treeNode(storedNodes[i]));
             }
         } else {
-            collapseTree();
+            if (!DraggableMPTTAdmin.expandTreeByDefault) {
+                collapseTree();
+            }
         }
     }
 

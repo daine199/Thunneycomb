@@ -1,5 +1,5 @@
 # REST SETTINGS
-LOGIN_ENABLE = False
+LOGIN_ENABLE = True
 
 REST_APPS = ['rest_framework',
              'rest_framework.authtoken'
@@ -19,5 +19,5 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated',
     #     'rest_framework.permissions.AllowAny'
     # ],
-    'LANGUAGE_CODE': 'zh_cn'
+    # 'LANGUAGE_CODE': 'zh_cn'
 }

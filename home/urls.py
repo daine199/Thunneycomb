@@ -1,10 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path, include
-from rest_framework import routers
-from .rest_view_set import EntranceViewSet, SwitchViewSet
+from django.urls import path
 from .admin import admin_site
 
 from home import views
@@ -28,13 +25,4 @@ urlpatterns += [
     path(r'deploy/', views.deploy_entrance, name='deploy_entrance')
 ]
 
-# Rest Admin
-router = routers.DefaultRouter()
-router.register(r'Entrances', EntranceViewSet)
-router.register('Switch', SwitchViewSet)
-
-urlpatterns += [
-    url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^home/', include(router.urls))
-]
 

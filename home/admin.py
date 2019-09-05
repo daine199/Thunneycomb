@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 
 # 设置站点名
 class MyAdminSite(AdminSite):
-    site_header = 'Thunneycomb Admin'
+    site_header = 'MyAdmin'
 
 
 admin_site = MyAdminSite(name='myadmin')
