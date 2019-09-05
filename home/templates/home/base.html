@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'home/css/owl.carousel.css' %}" >
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'home/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/responsive.css' %}">
+
+    <!-- Js -->
+    <script src="{% static 'home/js/vendor/modernizr-2.6.2.min.js' %}"></script>
+    <script src="{% static 'home/js/vendor/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'home/js/plugins.js' %}"></script>
+    <script src="{% static 'home/js/min/waypoints.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.counterup.js' %}"></script>
+    <script src="{% static 'home/js/main.js' %}"></script>
+
+</head>
+<body>
+
+{% block main_header %}     {% endblock %}
+{% block body_content %}    {% endblock %}
+{% block main_footer %}     {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "home/entrance_base.html" %}
+{% load staticfiles %}
+
+{% block body_content %}
+    <div class="error-block">
+        {% if error%}
+        {{ error }}
+        {% endif %}
+    </div>
+    <div class="search-block">
+        <form action="." method="POST">
+            {% csrf_token %}
+        <input type="text" placeholder="Search @ Thuneycomb" id="iSearch" name="app_name"/>
+        <input type="submit" hidden/>
+    </form>
+    </div>
+{% endblock %}
