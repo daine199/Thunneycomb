@@ -41,10 +41,12 @@ if 'product' == CURRENT_ENV:
     DEBUG = False
     from .db_settings.mysql_db import MYSQL_DB
     DATABASES = MYSQL_DB
+    ALLOWED_HOSTS = ['127.0.0.1']
 elif 'macos' == CURRENT_ENV:
     DEBUG = True
     from .db_settings.postgre_db import POSTGRESQL_DB
     DATABASES = POSTGRESQL_DB
+    ALLOWED_HOSTS = []
 else:
     DEBUG = True
     user_path = os.getenv('HOME')
@@ -60,8 +62,8 @@ else:
             'NAME': os.path.join(db_path, db_file),
         }
     }
+    ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
