@@ -8,7 +8,7 @@ echo ""
 echo "Start Thunneycomb Service..."
 ps -eaf | grep thunder | grep uwsgi | awk '{print $2}' | xargs kill -9
 sleep 2
-uwsgi -i uwsgi_py34.ini &
+uwsgi -i uwsgi_py.ini &
 echo "Thunndycomb Started."
 echo ""
 
