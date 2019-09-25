@@ -14,9 +14,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # 新建虚环境
 mkvirtualenv --python=/usr/bin/python3.5 --no-site-packages py3.5
-mkvirtualenv --python=/usr/bin/python3.5 --no-site-packages thunneycomb
+mkvirtualenv --python=/usr/bin/python3.5 --no-site-packages newThunneycomb
 mkvirtualenv --python=/usr/bin/python2.7 --no-site-packages py2.7
-workon thunneycomb
+workon newThunneycomb
 # workon 虚环境不能用字符，否则uwsgi会有寻址异常
 
 
