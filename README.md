@@ -1,5 +1,4 @@
-# wintercome
-# Working on Py3.4 env.
+# Thunneycomb 
 
 # 2019-09-26 update  
 1. 更新Django到2.x， 更新Python到3.5+
