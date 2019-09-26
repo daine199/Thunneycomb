@@ -4,7 +4,7 @@ import logging
 
 from django.core import exceptions
 from django.http import JsonResponse
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 
 from platycodon.models import Platycodon
 
@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 
+@login_required()
 @permission_required("platycodon.view_platycodon", raise_exception=True)
 def get_platycodon_by_id(request):
     res = {'title': None, 'content': None}
