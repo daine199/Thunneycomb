@@ -147,3 +147,7 @@ mysql_db.py
 postgre_db.py
 migrations
 migrations/*
+
+# Static & media
+media
+static
