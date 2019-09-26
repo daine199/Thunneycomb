@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core import exceptions
 from django.http import HttpResponse
@@ -96,3 +97,43 @@ def deploy_entrance(request):
     else:
         return redirect(reverse(entrance))
 
+
+def login_user(request, *args, **kwargs):
+    if request.method == 'GET':
+        next_page = request.GET.get('next')
+        if not request.user.is_authenticated:
+            if next_page is not None:
+                request.session['next'] = next_page
+            return render(request, 'home/login.html')
+        else:
+            if next_page is not None:
+                return redirect("/{next}".format(next=next_page))
+            else:
+                return redirect("/")
+    if request.method == 'POST':
+        userid = request.POST.get('userid')
+        password = request.POST.get('password')
+        user = authenticate(username=userid, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                next_page = request.session.get('next', '/')
+                print(next_page)
+                if next_page is not None:
+                    return redirect("{next}".format(next=next_page))
+                else:
+                    return redirect("/")
+            else:
+                context = {"error": "Disable UserID {}".format(userid)}
+                return render(request, 'home/login.html', context)
+        else:
+            context = {"error": "Unknown UserID {}".format(userid)}
+            return render(request, 'home/login.html', context)
+
+
+def logout_processor(request):
+    if request.user.is_authenticated:
+        logout(request)
+        return redirect("/")
+    else:
+        return redirect("/")
