@@ -26,7 +26,7 @@ def get_platycodon_by_id(request):
     try:
         platycodon = Platycodon.objects.get(id=platycodon_id)
         res['title'] = platycodon.title
-        res['content']: platycodon.content
+        res['content'] = platycodon.content
     except exceptions.ObjectDoesNotExist:
         logger.warning("\nplatycodon not found.")
 
