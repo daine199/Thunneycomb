@@ -1,13 +1,10 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-import json
 import logging
-from django.core import exceptions
 
-from django.core.serializers.json import DjangoJSONEncoder
-from django.shortcuts import render
-from django.core.serializers import serialize
-from django.http import JsonResponse, HttpResponse
+from django.core import exceptions
+from django.http import JsonResponse
+from django.contrib.auth.decorators import permission_required
 
 from platycodon.models import Platycodon
 
@@ -17,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 
+@permission_required("platycodon.view_platycodon", raise_exception=True)
 def get_platycodon_by_id(request):
     res = {'title': None, 'content': None}
     platycodon_id = 0
