@@ -43,10 +43,10 @@ if 'product' == CURRENT_ENV:
     from .db_settings.mysql_db import MYSQL_DB
     DATABASES = MYSQL_DB
     ALLOWED_HOSTS = ['*']
-elif 'macos' == CURRENT_ENV:
-    DEBUG = True
-    from .db_settings.postgre_db import POSTGRESQL_DB
-    DATABASES = POSTGRESQL_DB
+# elif 'macos' == CURRENT_ENV:
+#     DEBUG = True
+#     from .db_settings.postgre_db import POSTGRESQL_DB
+#     DATABASES = POSTGRESQL_DB
 else:
     DEBUG = True
     user_path = os.getenv('HOME')
