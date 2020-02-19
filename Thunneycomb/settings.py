@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from Thunneycomb.app_settings.logging_settings import THUNNEYCOMB_LOGGING
 from Thunneycomb.app_settings.platycodon_settings import *
+from Thunneycomb.app_settings.sso_settings import *
 from Thunneycomb.app_settings.wiki_settings import WIKI_APPS, SITE_ID
 from Thunneycomb.env_check import get_env
 
@@ -166,3 +167,5 @@ ADMIN_SITE_HEADER = "Thunneycomb Admin"
 
 INSTALLED_APPS += WIKI_APPS
 INSTALLED_APPS += PLATYCODON_APPS
+INSTALLED_APPS += SSO_APPS
+
