@@ -73,7 +73,7 @@ def entrance(request):
 def index(request):
     if request.method == 'GET':
         # if request.user.is_authenticated:
-            return render(request, 'home/index.html')
+        return render(request, 'home/index.html')
     else:
         return redirect("/")
 
