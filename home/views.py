@@ -69,7 +69,7 @@ def entrance(request):
         return render(request, 'home/entrance.html')
 
 
-@login_required()
+# @login_required()
 def index(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
